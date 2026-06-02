@@ -1,0 +1,68 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "bc1265b4f548d8c51328c1b99eb8ce61"
+# IMPORTANT: Replace with your actual production URL before submitting to App Store
+# Example: application_url = "https://daily-toolkit.vercel.app"
+application_url = "https://daily-toolkit-five.vercel.app"
+embedded = true
+name = "Daily Toolkit"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+# Review these scopes - remove any you don't actually use
+scopes = "write_products,read_themes"
+
+[product.metafields.app.demo_info]
+type = "single_line_text_field"
+name = "Demo Source Info"
+description = "Tracks products created by the Shopify app template for development"
+
+  [product.metafields.app.demo_info.access]
+  admin = "merchant_read_write"
+
+[metaobjects.app.example]
+name = "Example"
+description = "An example metaobject definition created by this template"
+
+  [metaobjects.app.example.access]
+  admin = "merchant_read_write"
+
+[metaobjects.app.example.fields.title]
+name = "Title"
+type = "single_line_text_field"
+required = true
+
+[metaobjects.app.example.fields.description]
+name = "Description"
+type = "multi_line_text_field"
+
+[webhooks]
+api_version = "2026-07"
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app/uninstalled"
+  topics = [ "app/uninstalled" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app/scopes_update"
+  topics = [ "app/scopes_update" ]
+
+  # GDPR Compliance Webhooks - Required for public App Store submission
+  [[webhooks.subscriptions]]
+  compliance_topics = ["customers/data_request", "customers/redact", "shop/redact"]
+  uri = "/webhooks/compliance"
+
+[auth]
+# IMPORTANT: Replace with your actual production URL before submitting to App Store
+# Example: redirect_urls = [ "https://daily-toolkit.vercel.app/api/auth" ]
+redirect_urls = [ "https://daily-toolkit-five.vercel.app/api/auth" ]
+
+[build]
+automatically_update_urls_on_dev = true
+
+# Pre-deployment Checklist (complete before App Store submission):
+# 1. Update application_url to production domain
+# 2. Update redirect_urls to production domain
+# 3. Verify all webhook endpoints return 200
+# 4. Test GDPR webhooks with Shopify CLI: shopify app webhook trigger
+# 5. Run full QA checklist from QA_CHECKLIST.md
