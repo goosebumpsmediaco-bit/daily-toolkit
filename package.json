@@ -2,7 +2,8 @@
   "name": "daily-toolkit",
   "private": true,
   "scripts": {
-    "build": "npm run schema:use:postgres && prisma generate && react-router build",
+    "build": "prisma generate && react-router build",
+    "postinstall": "prisma generate",
     "schema:use:postgres": "cp prisma/schema.postgresql.prisma prisma/schema.prisma",
     "schema:use:sqlite": "cp prisma/schema.sqlite.prisma prisma/schema.prisma",
     "dev": "npm run schema:use:sqlite && shopify app dev",
